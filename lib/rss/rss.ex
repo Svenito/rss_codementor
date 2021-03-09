@@ -26,7 +26,5 @@ defmodule Rss.Rss do
     end)
 
     loop([], Enum.count(feeds))
-
-    # Enum.each(fn x -> print_feed(x) end)
   end
 end
