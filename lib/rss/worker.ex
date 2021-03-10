@@ -24,9 +24,12 @@ defmodule Rss.Worker do
   end
 
   defp parse_response({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    case FastRSS.parse(body) do
-      {:ok, rss_map} -> {:ok, rss_map}
-      _ -> :error
+    case FeederEx.parse(body) do
+      {:ok, rss_map, _} ->
+        {:ok, rss_map}
+
+      _ ->
+        :error
     end
   end
 

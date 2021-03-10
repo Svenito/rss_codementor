@@ -44,7 +44,7 @@ defmodule Rss.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:fast_rss, "~> 0.3.4"},
+      {:feeder_ex, "~> 1.1"},
       {:httpoison, "~> 1.7"}
     ]
   end

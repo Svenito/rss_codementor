@@ -2,7 +2,7 @@
 <section class="box">
   <form phx-submit="search">
     <div>
-      <input class="input" type="text" name="q" value="<%= @query %>" placeholder="RSS Feed URL. Space separated list" list="results" autocomplete="off"/>
+      <textarea class="textarea" rows=5 name="q" placeholder="RSS Feed URLs. One per line" list="results" autocomplete="off"><%= @query %></textarea>
     </div>
 
     <div>
@@ -11,27 +11,31 @@
   </form>
 </section>
 
+
 <%= for app <- @results do %>
-  <h1 class="title is-1"><%= app["title"] %></h1>
-    <%= for item <- app["items"] do %>
-      <div class="box">
+  <div class="box feed">
+    <img src="<%= app.image %>"/>
+    <h2 class="title is-2"><%= app.title %></h2>
+      <%= for item <- app.entries do %>
+        <div class="box">
 
-        <div class="card-content">
-          <div class="media">
+          <div class="card-content">
+            <div class="media">
 
-            <div class="media-content">
-              <a href="<%= item["link"] %>">
-                <p class="has-text-link title is-4"><%= item["title"] %></p>
-              </a>
-              <p class="has-text-grey subtitle is-7"><%= item["pub_date"] %></p>
+              <div class="media-content">
+                <a href="<%= item.link %>">
+                  <p class="has-text-link title is-4"><%= item.title %></p>
+                </a>
+                <p class="has-text-grey subtitle is-7"><%= item.updated %></p>
+              </div>
+            </div>
+
+            <div class="content">
+              <%= raw(item.summary) %>
             </div>
           </div>
 
-          <div class="content">
-            <%= raw(item["description"]) %>
-          </div>
         </div>
-
-      </div>
-    <% end %>
+      <% end %>
+  </div>
 <% end %>
