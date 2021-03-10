@@ -1,4 +1,15 @@
 
+<section class="hero is-link">
+  <div class="hero-body">
+    <p class="title">
+      RSS feed parser
+    </p>
+    <p class="subtitle">
+      Built with <a href="https://www.phoenixframework.org/">Phoenix</a> for <a href="https://www.codementor.io">Codementor</a> submission
+    </p>
+  </div>
+</section>
+
 <section class="box">
   <form phx-submit="search">
     <div>
@@ -11,6 +22,12 @@
   </form>
 </section>
 
+
+<%= for app <- @errors do %>
+<p class="has-text-info">
+  Error processing <span class="has-text-weight-semibold"><%= app %></span>
+</p>
+<%end %>
 
 <%= for app <- @results do %>
   <div class="box feed">

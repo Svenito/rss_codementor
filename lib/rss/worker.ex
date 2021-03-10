@@ -2,7 +2,7 @@ defmodule Rss.Worker do
   def loop do
     receive do
       {sender_pid, feed_url} ->
-        send(sender_pid, {:ok, feed_items(feed_url)})
+        send(sender_pid, feed_items(feed_url))
 
       _ ->
         IO.puts("Unable to handle message")
@@ -11,15 +11,15 @@ defmodule Rss.Worker do
     loop()
   end
 
-  def feed_items(feed_url) do
+  defp feed_items(feed_url) do
     result =
       feed_url
       |> HTTPoison.get()
       |> parse_response
 
     case result do
-      {:ok, items} -> items
-      :error -> %{}
+      {:ok, items} -> {:ok, items}
+      :error -> {:error, feed_url}
     end
   end
 
